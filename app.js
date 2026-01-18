@@ -35,6 +35,9 @@ function initAudio() {
 
 function playBeep(frequency, duration, type = 'sine') {
     if (!audioContext) return;
+    if (audioContext.state === 'suspended') {
+        audioContext.resume();
+    }
 
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
