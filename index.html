@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Warm-Up">
+    <meta name="theme-color" content="#000000">
+    <title>Warm-Up Routine</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.svg">
+    <link rel="icon" type="image/svg+xml" href="icon-192.svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main Screen -->
+    <div id="main-screen" class="screen active">
+        <header>
+            <h1>Warm-Up Routine</h1>
+            <p class="subtitle">6 exercises &bull; 60 seconds each</p>
+        </header>
+
+        <ul class="exercise-list" id="exercise-list"></ul>
+
+        <button id="start-btn" class="primary-btn">Start Warm-Up</button>
+    </div>
+
+    <!-- Exercise Screen -->
+    <div id="exercise-screen" class="screen">
+        <div class="screen-content">
+            <div class="exercise-header">
+                <h2 id="exercise-name">Dead Hang</h2>
+                <p class="instruction">Hold the position</p>
+            </div>
+
+            <div class="timer-container">
+                <svg class="progress-ring" viewBox="0 0 200 200">
+                    <circle class="progress-ring-bg" cx="100" cy="100" r="90"/>
+                    <circle class="progress-ring-fill" cx="100" cy="100" r="90" id="progress-circle"/>
+                </svg>
+                <div class="timer-display" id="timer-display">1:00</div>
+            </div>
+
+            <p class="progress-label" id="progress-label">1 of 6</p>
+
+            <button id="pause-btn" class="control-btn pause">Pause</button>
+        </div>
+    </div>
+
+    <!-- Rest Screen -->
+    <div id="rest-screen" class="screen">
+        <div class="screen-content">
+            <div class="exercise-header">
+                <h2 id="rest-title">Rest</h2>
+                <p class="instruction">Prepare for next exercise</p>
+            </div>
+
+            <div class="timer-container">
+                <svg class="progress-ring" viewBox="0 0 200 200">
+                    <circle class="progress-ring-bg" cx="100" cy="100" r="90"/>
+                    <circle class="progress-ring-fill rest" cx="100" cy="100" r="90" id="rest-progress-circle"/>
+                </svg>
+                <div class="timer-display" id="rest-timer-display">1:00</div>
+            </div>
+
+            <div class="next-exercise" id="next-exercise">
+                <span class="next-label">Next:</span>
+                <span class="next-name" id="next-exercise-name">Reverse Hang</span>
+            </div>
+
+            <div class="rest-controls">
+                <button id="skip-btn" class="control-btn skip">Skip to 5s</button>
+                <button id="rest-pause-btn" class="control-btn pause">Pause</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Completion Screen -->
+    <div id="completion-screen" class="screen">
+        <div class="screen-content completion-content">
+            <div class="completion-icon">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="rgba(52, 199, 89, 0.2)"/>
+                    <circle cx="50" cy="50" r="35" fill="rgba(52, 199, 89, 0.3)"/>
+                    <path d="M30 50 L45 65 L70 35" stroke="#34C759" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <h2>Warm-Up Complete!</h2>
+            <p class="completion-message">Great job! You've completed all 6 exercises.</p>
+
+            <div class="completion-buttons">
+                <button id="restart-btn" class="primary-btn">Restart Warm-Up</button>
+                <button id="exit-btn" class="secondary-btn">Exit to Main</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
