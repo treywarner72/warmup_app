@@ -157,9 +157,8 @@ function tick() {
 
     const isWarning = remainingTime <= WARNING_THRESHOLD && remainingTime > 0;
 
-    if (state === 'rest' && isWarning && !hasPlayedWarning) {
+    if (isWarning && remainingTime > 0) {
         playWarningBeep();
-        hasPlayedWarning = true;
     }
 
     updateUI();
@@ -181,9 +180,10 @@ function updateUI() {
         elements.exerciseName.textContent = exercise.name;
         elements.timerDisplay.textContent = formatTime(remainingTime);
         elements.progressLabel.textContent = `${currentExerciseIndex + 1} of ${exercises.length}`;
-        updateProgressRing(elements.progressCircle, progress);
+        updateProgressRing(elements.progressCircle, progress, isWarning);
 
-        elements.timerDisplay.classList.remove('warning');
+        elements.exerciseName.classList.toggle('warning', isWarning);
+        elements.timerDisplay.classList.toggle('warning', isWarning);
     }
 
     if (state === 'rest' || (isPaused && pausedFrom === 'rest')) {
