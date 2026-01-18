@@ -2,7 +2,7 @@
     "name": "Warm-Up Routine",
     "short_name": "Warm-Up",
     "description": "6-exercise warm-up routine with timers",
-    "start_url": "/",
+    "start_url": "./",
     "display": "standalone",
     "background_color": "#000000",
     "theme_color": "#000000",

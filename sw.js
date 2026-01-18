@@ -1,12 +1,12 @@
-const CACHE_NAME = 'warmup-v1';
+const CACHE_NAME = 'warmup-v2';
 const ASSETS = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/app.js',
-    '/manifest.json',
-    '/icon-192.svg',
-    '/icon-512.svg'
+    './',
+    './index.html',
+    './styles.css',
+    './app.js',
+    './manifest.json',
+    './icon-192.svg',
+    './icon-512.svg'
 ];
 
 // Install - cache assets
@@ -35,6 +35,6 @@ self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)
             .then(response => response || fetch(event.request))
-            .catch(() => caches.match('/index.html'))
+            .catch(() => caches.match('./index.html'))
     );
 });
