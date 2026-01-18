@@ -1,4 +1,4 @@
-const CACHE_NAME = 'warmup-v2';
+const CACHE_NAME = 'warmup-v3';
 const ASSETS = [
     './',
     './index.html',
