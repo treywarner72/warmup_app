@@ -13,7 +13,7 @@ const WARNING_THRESHOLD = 5;
 const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * 90; // 565.48
 
 // State
-let state = 'notStarted'; // notStarted, exercise, rest, paused, completed
+let state = 'notStarted'; // notStarted, getReady, exercise, rest, paused, completed
 let currentExerciseIndex = 0;
 let remainingTime = 0;
 let isPaused = false;
@@ -70,6 +70,7 @@ function playSuccess() {
 // DOM Elements
 const screens = {
     main: document.getElementById('main-screen'),
+    getReady: document.getElementById('getready-screen'),
     exercise: document.getElementById('exercise-screen'),
     rest: document.getElementById('rest-screen'),
     completion: document.getElementById('completion-screen')
@@ -89,6 +90,8 @@ const elements = {
     nextExerciseName: document.getElementById('next-exercise-name'),
     restPauseBtn: document.getElementById('rest-pause-btn'),
     skipBtn: document.getElementById('skip-btn'),
+    getReadyCountdown: document.getElementById('getready-countdown'),
+    firstExerciseName: document.getElementById('first-exercise-name'),
     restartBtn: document.getElementById('restart-btn'),
     exitBtn: document.getElementById('exit-btn')
 };
@@ -172,6 +175,11 @@ function tick() {
 function updateUI() {
     const isWarning = remainingTime <= WARNING_THRESHOLD && remainingTime > 0;
 
+    if (state === 'getReady') {
+        elements.getReadyCountdown.textContent = remainingTime;
+        elements.getReadyCountdown.classList.toggle('warning', isWarning);
+    }
+
     if (state === 'exercise' || (isPaused && pausedFrom === 'exercise')) {
         const exercise = exercises[currentExerciseIndex];
         const total = exercise.duration;
@@ -221,6 +229,16 @@ function handleTimerComplete() {
     timerInterval = null;
     playBuzzer();
 
+    if (state === 'getReady') {
+        state = 'exercise';
+        remainingTime = exercises[0].duration;
+        hasPlayedWarning = false;
+        showScreen('exercise');
+        updateUI();
+        startTimer();
+        return;
+    }
+
     if (state === 'exercise') {
         if (currentExerciseIndex < exercises.length - 1) {
             // Move to rest
@@ -258,13 +276,14 @@ function startTimer() {
 // Start workout
 function startWorkout() {
     initAudio();
-    state = 'exercise';
+    state = 'getReady';
     currentExerciseIndex = 0;
-    remainingTime = exercises[0].duration;
+    remainingTime = 5;
     isPaused = false;
     hasPlayedWarning = false;
 
-    showScreen('exercise');
+    elements.firstExerciseName.textContent = exercises[0].name;
+    showScreen('getReady');
     updateUI();
     startTimer();
 }

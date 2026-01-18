@@ -296,6 +296,17 @@ html {
     flex: 1;
 }
 
+.countdown-display {
+    font-size: 120px;
+    font-weight: 700;
+    color: var(--blue);
+}
+
+.countdown-display.warning {
+    color: var(--red);
+    animation: flash 0.5s ease-in-out infinite;
+}
+
 .next-exercise {
     background: rgba(0, 122, 255, 0.15);
     padding: 16px 24px;
